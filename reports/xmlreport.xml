@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="34.801225">
+<testcase classname="Verification of elearning.gm functionalities" name="verify the website of elearning.gm" time="34.801225">
+<system-out><![CDATA[Given the user opens the elearning webpage..................................passed
+And user clicks on signup button............................................passed
+When the registration page opens............................................passed
+And user enters mandatory values first name as  "Quser11" last name as "Qser23" email as "Quser11@gmail.com" username as "Quser11xy" password as "garrick2014@" confirm "garrick2014@".passed
+When clicks on register button..............................................passed
+Then the registration is successful msg is seen.............................passed
+And the user clicks on the dropdown in top right corner.....................passed
+And check if the emaild id is matched with the mail id given by user........passed
+Then click on inbox and compose a new email.................................passed
+And enter the email id to be sent email id as "virat" subject as "testing" message as  "Hi Virat" description as "<description>".passed
+And click on send message button............................................passed
+Then the mail is successfully sent..........................................passed
+]]></system-out>
+</testcase>
+</testsuite>
