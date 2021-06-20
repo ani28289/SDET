@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="c4f465ab-03d0-45cb-9593-cba9259c126c" discardOkResults="false" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="user" searchProperties="true" timeout="0" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings>
+    <con:setting id="c4f465ab-03d0-45cb-9593-cba9259c126cfileName">user</con:setting>
+  </con:settings>
+  <con:savedRecentRuns>1</con:savedRecentRuns>
+  <con:testStep type="properties" name="Petname" id="38a1d999-7ea7-4280-a64a-d5edc5d1d487">
+    <con:settings/>
+    <con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:properties>
+        <con:property>
+          <con:name>FirstName</con:name>
+          <con:value>Anita</con:value>
+        </con:property>
+        <con:property>
+          <con:name>LastName</con:name>
+          <con:value>Elizabeth</con:value>
+        </con:property>
+        <con:property>
+          <con:name>Email</con:name>
+          <con:value>anita@gmail.com</con:value>
+        </con:property>
+        <con:property>
+          <con:name>Username</con:name>
+          <con:value>anita</con:value>
+        </con:property>
+        <con:property>
+          <con:name>Password</con:name>
+          <con:value>123</con:value>
+        </con:property>
+        <con:property>
+          <con:name>Phone</con:name>
+          <con:value>987654321</con:value>
+        </con:property>
+        <con:property>
+          <con:name>UserStatus</con:name>
+          <con:value>0</con:value>
+        </con:property>
+        <con:property>
+          <con:name>ID</con:name>
+          <con:value/>
+        </con:property>
+      </con:properties>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="groovy" name="Groovy Script" id="771f7f12-620d-42ba-970b-86c33599fbd8">
+    <con:settings/>
+    <con:config>
+      <script>import java.io.File 
+import jxl.* 
+import groovy.json.JsonSlurper 
+//read excelfile 
+Workbook wb = Workbook.getWorkbook(new File('C:/Users/AnitaEdwin/Desktop/groovy.xls')) 
+sheet = wb.getSheet(0) 
+row = sheet.getRows() 
+for(i=0;i&lt;row;i++) 
+{ 
+	firstname=sheet.getCell(0,i).getContents()  
+	lastname =sheet.getCell(1,i).getContents() 
+	username =sheet.getCell(2,i).getContents()
+	email =sheet.getCell(3,i).getContents()
+	password =sheet.getCell(4,i).getContents() 
+	phone =sheet.getCell(5,i).getContents() 
+	userstatus =sheet.getCell(6,i).getContents() 
+	testRunner.testCase.getTestStepByName("Petname").setPropertyValue("FirstName",firstname) 
+	testRunner.testCase.getTestStepByName("Petname").setPropertyValue("LastName",lastname) 
+	testRunner.testCase.getTestStepByName("Petname").setPropertyValue("Username",username) 
+	testRunner.testCase.getTestStepByName("Petname").setPropertyValue("Email",email) 
+	testRunner.testCase.getTestStepByName("Petname").setPropertyValue("Password",password) 
+	testRunner.testCase.getTestStepByName("Petname").setPropertyValue("Phone",phone) 
+	testRunner.testCase.getTestStepByName("Petname").setPropertyValue("UserStatus",userstatus) 
+	testRunner.testCase.testSuite.project.testSuites["TestSuite"].testCases["user"].testSteps["PostUser"].run(testRunner,context) 
+	def responsebody = context.testCase.getTestStepByName("PostUser").getPropertyValue("response") 
+	slurperResponse = new JsonSlurper().parseText(responsebody) 
+}</script>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="PostUser" id="c94de798-8f51-4cdb-b48e-e12728d225d0">
+    <con:settings/>
+    <con:config service="https://petstore.swagger.io" resourcePath="/v2/user/createWithList" methodName="V2" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:restRequest name="PostUser" id="da031114-bd52-4493-b14c-be502b5029bb" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://petstore.swagger.io</con:endpoint>
+        <con:request>[
+  {
+    "id": 0,
+    "username": "${Petname#Username}",
+    "firstName": "${Petname#FirstName}",
+    "lastName": "${Petname#LastName}",
+    "email": "${Petname#Email}",
+    "password": "${Petname#Password}",
+    "phone": "${Petname#Phone}",
+    "userStatus": ${Petname#UserStatus}
+  }
+]</con:request>
+        <con:originalUri>https://petstore.swagger.io/v2/user/createWithList</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="4f3f7cfa-d4ce-489a-9843-88a7981ae675" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Simple Contains" id="dc9e3e31-1953-48db-b781-9eca231d2c8a" name="Contains">
+          <con:configuration>
+            <token>ok</token>
+            <ignoreCase>true</ignoreCase>
+            <useRegEx>false</useRegEx>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters/>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="groovy" name="EditUser-Groovy" id="d65b2595-de27-40dc-8632-e54e6f302fb1">
+    <con:settings/>
+    <con:config>
+      <script>import java.io.File 
+import jxl.* 
+import groovy.json.JsonSlurper 
+//read excelfile 
+Workbook wb = Workbook.getWorkbook(new File('C:/Users/AnitaEdwin/Desktop/UserModify.xls')) 
+sheet = wb.getSheet(0) 
+row = sheet.getRows() 
+for(i=0;i&lt;row;i++) 
+{ 
+	firstname=sheet.getCell(0,i).getContents()  
+	lastname =sheet.getCell(1,i).getContents() 
+	username =sheet.getCell(2,i).getContents()
+	email =sheet.getCell(3,i).getContents()
+	password =sheet.getCell(4,i).getContents() 
+	phone =sheet.getCell(5,i).getContents() 
+	userstatus =sheet.getCell(6,i).getContents() 
+	testRunner.testCase.getTestStepByName("Petname").setPropertyValue("FirstName",firstname) 
+	testRunner.testCase.getTestStepByName("Petname").setPropertyValue("LastName",lastname) 
+	testRunner.testCase.getTestStepByName("Petname").setPropertyValue("Username",username) 
+	testRunner.testCase.getTestStepByName("Petname").setPropertyValue("Email",email) 
+	testRunner.testCase.getTestStepByName("Petname").setPropertyValue("Password",password) 
+	testRunner.testCase.getTestStepByName("Petname").setPropertyValue("Phone",phone) 
+	testRunner.testCase.getTestStepByName("Petname").setPropertyValue("UserStatus",userstatus) 
+	testRunner.testCase.testSuite.project.testSuites["TestSuite"].testCases["user"].testSteps["EditUser"].run(testRunner,context) 
+	def responsebody = context.testCase.getTestStepByName("EditUser").getPropertyValue("response") 
+	slurperResponse = new JsonSlurper().parseText(responsebody) 
+}</script>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="EditUser" id="ea111850-8250-4a6c-9bb4-067450f02322">
+    <con:settings/>
+    <con:config service="https://petstore.swagger.io" resourcePath="/v2/user/{username}" methodName="PUT" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:restRequest name="EditUser" id="3a225d21-0d59-430b-969f-5103894bd773" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://petstore.swagger.io</con:endpoint>
+        <con:request>{
+    "id": 0,
+    "username": "${Petname#Username}",
+    "firstName": "${Petname#FirstName}",
+    "lastName": "${Petname#LastName}",
+    "email": "${Petname#Email}",
+    "password": "${Petname#Password}",
+    "phone": "${Petname#Phone}",
+    "userStatus": ${Petname#UserStatus}
+  }</con:request>
+        <con:originalUri>https://petstore.swagger.io/v2/user/Anita</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="6ed44e2f-6db8-411f-9ecc-13a7b2cd96bf" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="username" value="${Petname#Username}"/>
+        </con:parameters>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:properties/>
+  <con:reportParameters/>
+  <con:breakPoints>
+    <con:testStepId>38a1d999-7ea7-4280-a64a-d5edc5d1d487</con:testStepId>
+    <con:status>NONE</con:status>
+    <con:properties/>
+  </con:breakPoints>
+  <con:breakPoints>
+    <con:testStepId>d65b2595-de27-40dc-8632-e54e6f302fb1</con:testStepId>
+    <con:status>NONE</con:status>
+    <con:properties/>
+  </con:breakPoints>
+</con:testCase>

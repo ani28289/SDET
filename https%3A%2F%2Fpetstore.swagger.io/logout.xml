@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:resource name="logout" path="/v2/user/logout" id="00f09d3c-ee6e-477b-84e5-a3cbab050269" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings>
+    <con:setting id="00f09d3c-ee6e-477b-84e5-a3cbab050269fileName">logout</con:setting>
+  </con:settings>
+  <con:parameters/>
+  <con:method name="Method 1" id="3cc67f18-76d9-451b-b557-cc585984e9e2" method="GET">
+    <con:settings/>
+    <con:parameters/>
+    <con:representation type="RESPONSE">
+      <con:mediaType>application/json</con:mediaType>
+      <con:status>200</con:status>
+      <con:params/>
+      <con:element xmlns:log="https://petstore.swagger.io/v2/user/logout">log:Response</con:element>
+    </con:representation>
+    <con:request name="Request 1" id="0d66dbe3-2639-4888-aee8-1bec5927dfce" mediaType="application/json">
+      <con:settings/>
+      <con:endpoint>https://petstore.swagger.io</con:endpoint>
+      <con:request/>
+      <con:credentials>
+        <con:authType>No Authorization</con:authType>
+      </con:credentials>
+      <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+      <con:parameters/>
+    </con:request>
+  </con:method>
+</con:resource>

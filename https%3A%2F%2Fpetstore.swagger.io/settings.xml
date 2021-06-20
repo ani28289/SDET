@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:interface xsi:type="con:RestService" id="784e3e9d-7c75-4b88-81d3-74c48e20af7d" wadlVersion="http://wadl.dev.java.net/2009/02" name="https://petstore.swagger.io" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings>
+    <con:setting id="784e3e9d-7c75-4b88-81d3-74c48e20af7dfileName">https%3A%2F%2Fpetstore.swagger.io</con:setting>
+  </con:settings>
+  <con:definitionCache type="TEXT" rootPart=""/>
+  <con:endpoints>
+    <con:endpoint>https://petstore.swagger.io</con:endpoint>
+  </con:endpoints>
+</con:interface>

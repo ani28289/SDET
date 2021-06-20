@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="8189d512-624d-44dc-a472-bfc5d9702ca4" discardOkResults="false" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="DeleteUser" searchProperties="true" timeout="0" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings>
+    <con:setting id="8189d512-624d-44dc-a472-bfc5d9702ca4fileName">DeleteUser</con:setting>
+  </con:settings>
+  <con:testStep type="restrequest" name="REST Request" id="fd38793c-cee3-4087-8d28-cbf4d484c7e0">
+    <con:settings/>
+    <con:config service="https://petstore.swagger.io" resourcePath="/v2/user/{username}" methodName="DELETE" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:restRequest name="REST Request" id="03a624a6-bf8c-416f-8e5c-ebcd42eb456c" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://petstore.swagger.io</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://petstore.swagger.io/v2/user/anita</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="d373a4e6-6cc7-4826-8879-0e39b458b4e6" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="username" value="anita"/>
+        </con:parameters>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:properties/>
+  <con:reportParameters/>
+</con:testCase>
